@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String          @default(uuid()) @id
+  name      String
+  email     String          @unique
+  password  String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  documents UserDocuments[] 
+  abilities UserAbilities[]
+}
+
+model UserDocuments {
+  id        String   @default(uuid()) @id
+  name      String
+  url       String
+  user_id   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User @relation(fields: [user_id], references: [id]) 
+}
+
+model Abilities {
+  id        String          @default(uuid()) @id
+  name      String
+  active    Boolean
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  users     UserAbilities[] 
+}
+
+model UserAbilities {
+  id              String   @default(uuid()) @id
+  user_id         String
+  ability_id      String
+  years_experience Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user    User     @relation(fields: [user_id], references: [id]) 
+  ability Abilities @relation(fields: [ability_id], references: [id]) 
+}
+
