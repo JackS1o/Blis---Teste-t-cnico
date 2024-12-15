@@ -16,7 +16,6 @@ services:
       - mysql
     volumes:
       - .:/app
-      - /app/node_modules
 
   mysql:
     image: mysql:8.0
