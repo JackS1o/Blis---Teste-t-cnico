@@ -1,17 +1,33 @@
+import { prisma } from '../../../prisma/client';
+import { hashPassword } from '../utils/passwordUtils';
+import { AppError } from '../../../errors';
 
-import { prisma } from "../../../prisma/client";
-import { hashPassword } from "../utils/passwordUtils";
+export const createUserUseCase = async (
+  name: string,
+  birthdate: Date,
+  email: string,
+  password: string
+) => {
+  const userExists = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
 
-export const createUserUseCase = async (name: string, email: string, password: string) => {
-  const hashedPassword = await hashPassword(password); 
+  if (userExists) {
+    throw new AppError('User already exists', 409);
+  }
+
+  const hashedPassword = await hashPassword(password);
 
   const user = await prisma.user.create({
     data: {
       name,
+      birthdate,
       email,
       password: hashedPassword,
     },
   });
 
-  return user; 
+  return user;
 };

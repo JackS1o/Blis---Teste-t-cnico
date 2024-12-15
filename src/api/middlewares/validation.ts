@@ -10,7 +10,7 @@ export const validate = (schema: Joi.ObjectSchema) => {
         message: 'Validation error',
         details: error.details,
       });
-      return; 
+      return;
     }
 
     next();

@@ -15,6 +15,6 @@ export async function connectToDatabase() {
     return connection;
   } catch (error) {
     console.error('Error connecting to the database:', error);
-    throw error; 
+    throw error;
   }
 }

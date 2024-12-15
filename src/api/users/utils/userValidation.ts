@@ -15,6 +15,7 @@ export const createUserValidationSchema = Joi.object({
     'string.empty': 'O nome é obrigatório.',
   }),
   email: emailValidation,
+  birthdate: Joi.date().required(),
   password: passwordValidation,
 });
 

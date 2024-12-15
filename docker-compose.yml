@@ -8,7 +8,7 @@ services:
     container_name: meu-backend
     restart: always
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - PORT=${PORT}
@@ -25,7 +25,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: meubanco
     ports:
-      - "3306:3306"
+      - '3306:3306'
     volumes:
       - mysql-data:/var/lib/mysql
 
