@@ -14,11 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectToDatabase = connectToDatabase;
 const promise_1 = __importDefault(require("mysql2/promise"));
-// Aqui estamos utilizando o nome do serviço como hostname
 const connectionConfig = {
-    host: 'mysql', // Nome do serviço no docker-compose.yml
+    host: 'mysql',
     user: 'root',
-    password: 'password', // Ou o que você estiver usando para o root
+    password: 'password',
     database: 'meubanco',
     port: 3306,
 };
@@ -31,7 +30,7 @@ function connectToDatabase() {
         }
         catch (error) {
             console.error('Error connecting to the database:', error);
-            throw error; // Rethrow to be handled at a higher level
+            throw error;
         }
     });
 }

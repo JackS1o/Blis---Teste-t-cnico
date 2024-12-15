@@ -23,3 +23,7 @@ export const loginValidationSchema = Joi.object({
   email: emailValidation,
   password: passwordValidation,
 });
+
+export const createUserDocumentValidationSchema = Joi.object({
+  name: Joi.string().required(),
+});

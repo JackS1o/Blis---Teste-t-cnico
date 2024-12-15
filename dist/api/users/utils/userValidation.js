@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginValidationSchema = exports.createUserValidationSchema = void 0;
+exports.createUserDocumentValidationSchema = exports.loginValidationSchema = exports.createUserValidationSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 const emailValidation = joi_1.default.string().email().required().messages({
     'string.email': 'O e-mail precisa ser válido.',
@@ -18,9 +18,13 @@ exports.createUserValidationSchema = joi_1.default.object({
         'string.empty': 'O nome é obrigatório.',
     }),
     email: emailValidation,
+    birthdate: joi_1.default.date().required(),
     password: passwordValidation,
 });
 exports.loginValidationSchema = joi_1.default.object({
     email: emailValidation,
     password: passwordValidation,
+});
+exports.createUserDocumentValidationSchema = joi_1.default.object({
+    name: joi_1.default.string().required(),
 });

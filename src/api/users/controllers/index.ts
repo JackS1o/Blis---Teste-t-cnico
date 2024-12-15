@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import { createUserUseCase } from '../useCases/createUserUseCase';
 import { loginUserUseCase } from '../useCases/loginUserUseCase';
+import { createUserDocumentUseCase } from '../useCases/createUserDocumentUseCase';
+import { AppError } from '../../../errors';
+import { IGetUserAuthInfoRequest } from '../types/definitionfile';
 
 export const createUser = async (
   req: Request,
@@ -24,4 +27,27 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   });
 };
 
+export const createUserDocument = async (
+  req: IGetUserAuthInfoRequest,
+  res: Response
+): Promise<void> => {
+  const { name } = req.body;
+  const userId = req.user?.id;
 
+  if (!userId) {
+    throw new AppError('User not authenticated', 401);
+  }
+
+  if (!req.file) {
+    throw new AppError('File is required', 400);
+  }
+
+  const filePath = `/uploads/${req.file.filename}`;
+
+  const document = await createUserDocumentUseCase(userId, name, filePath);
+
+  res.status(201).json({
+    message: 'Document created successfully',
+    document,
+  });
+};

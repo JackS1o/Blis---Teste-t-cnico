@@ -9,28 +9,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUserUseCase = void 0;
+exports.createUserDocumentUseCase = void 0;
 const client_1 = require("../../../prisma/client");
-const passwordUtils_1 = require("../utils/passwordUtils");
 const errors_1 = require("../../../errors");
-const createUserUseCase = (name, birthdate, email, password) => __awaiter(void 0, void 0, void 0, function* () {
-    const userExists = yield client_1.prisma.user.findUnique({
-        where: {
-            email,
-        },
-    });
-    if (userExists) {
-        throw new errors_1.AppError('User already exists', 409);
+const createUserDocumentUseCase = (userId, name, filePath) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const document = yield client_1.prisma.userDocuments.create({
+            data: {
+                user_id: userId,
+                name,
+                url: filePath,
+            },
+        });
+        return document;
     }
-    const hashedPassword = yield (0, passwordUtils_1.hashPassword)(password);
-    const user = yield client_1.prisma.user.create({
-        data: {
-            name,
-            birthdate,
-            email,
-            password: hashedPassword,
-        },
-    });
-    return user;
+    catch (error) {
+        throw new errors_1.AppError('Failed to create document', 500);
+    }
 });
-exports.createUserUseCase = createUserUseCase;
+exports.createUserDocumentUseCase = createUserDocumentUseCase;
