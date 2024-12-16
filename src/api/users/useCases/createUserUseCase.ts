@@ -25,7 +25,7 @@ export const createUserUseCase = async (
   if (!apiBonusUrl) {
     throw new AppError('API_BONUS environment variable is not set', 500);
   }
-
+  
   const { data } = await axios.get(apiBonusUrl);
 
   const user = await prisma.user.create({
@@ -45,8 +45,9 @@ export const createUserUseCase = async (
       url: image,
     },
   });
+  
 
   return {
     message: 'User created successfully',
-  };
+  }
 };
