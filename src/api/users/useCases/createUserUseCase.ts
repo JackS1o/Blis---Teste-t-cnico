@@ -1,6 +1,7 @@
 import { prisma } from '../../../prisma/client';
 import { hashPassword } from '../utils/passwordUtils';
 import { AppError } from '../../../errors';
+import axios from 'axios';
 
 export const createUserUseCase = async (
   name: string,
@@ -20,6 +21,13 @@ export const createUserUseCase = async (
 
   const hashedPassword = await hashPassword(password);
 
+  const apiBonusUrl = process.env.API_BONUS;
+  if (!apiBonusUrl) {
+    throw new AppError('API_BONUS environment variable is not set', 500);
+  }
+  
+  const { data } = await axios.get(apiBonusUrl);
+
   const user = await prisma.user.create({
     data: {
       name,
@@ -28,6 +36,16 @@ export const createUserUseCase = async (
       password: hashedPassword,
     },
   });
+
+  const image = data.message;
+
+  await prisma.dogProfilePictures.create({
+    data: {
+      user_id: user.id,
+      url: image,
+    },
+  });
+  
 
   return {
     message: 'User created successfully',

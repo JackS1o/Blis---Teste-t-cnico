@@ -13,7 +13,7 @@ export const getUserAbilitiesUseCase = async (userId: string, page: number, limi
     },
     include: {
       ability: true,
-      user: true
+      user: true,
     },
     skip: (page - 1) * limit,
     take: limit,
@@ -23,6 +23,12 @@ export const getUserAbilitiesUseCase = async (userId: string, page: number, limi
       }
     }
   });
+
+  const randomDogPicture = await prisma.dogProfilePictures.findFirst({
+    where: {
+      user_id: userId
+    }
+  })
 
   return {
     count,
@@ -34,6 +40,7 @@ export const getUserAbilitiesUseCase = async (userId: string, page: number, limi
         birthdate: ability.user.birthdate,
         ability: ability.ability.name,
         years_experience: ability.years_experience,
+        profilePicture: randomDogPicture?.url
       };
     })
   };
