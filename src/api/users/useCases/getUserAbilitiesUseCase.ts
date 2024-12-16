@@ -1,6 +1,6 @@
 import { prisma } from '../../../prisma/client';
 
-export const getUserAbilitiesUseCase = async (userId: string) => {
+export const getUserAbilitiesUseCase = async (userId: string, page: number, limit: number) => {
   const count = await prisma.userAbilities.count({
     where: {
       user_id: userId,
@@ -14,6 +14,8 @@ export const getUserAbilitiesUseCase = async (userId: string) => {
     include: {
       ability: true,
     },
+    skip: (page - 1) * limit,
+    take: limit
   });
 
   return {

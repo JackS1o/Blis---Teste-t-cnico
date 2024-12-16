@@ -96,7 +96,9 @@ export const getUserAbilities = async (req: IGetUserAuthInfoRequest, res: Respon
     throw new AppError('User not authenticated', 401);
   }
 
-  const abilities = await getUserAbilitiesUseCase(userId);
+  const { page, limit } = req.query;
+
+  const abilities = await getUserAbilitiesUseCase(userId, parseInt(page as string), parseInt(limit as string));
 
   res.status(200).json(abilities);
 };
