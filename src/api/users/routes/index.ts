@@ -40,7 +40,12 @@ router.post(
   wrapHandler(userAbilities)
 );
 
-router.delete('/abilities', authMiddleware, validate(deleteAbilitiesValidationSchema), wrapHandler(destroyAbility));
+router.delete(
+  '/abilities',
+  authMiddleware,
+  validate(deleteAbilitiesValidationSchema),
+  wrapHandler(destroyAbility)
+);
 
 router.get('/abilities', authMiddleware, wrapHandler(getUserAbilities));
 

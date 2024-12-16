@@ -1,6 +1,9 @@
 import { prisma } from '../../../prisma/client';
 
-export const destroyAbilityUseCase = async (abilities: Array<string>, userId: string) => {
+export const destroyAbilityUseCase = async (
+  abilities: Array<string>,
+  userId: string
+) => {
   const abilitiesList = abilities.map((ability) => {
     const abilityLowerCase = ability.toLowerCase();
     return abilityLowerCase;

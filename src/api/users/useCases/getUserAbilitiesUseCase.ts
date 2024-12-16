@@ -1,11 +1,15 @@
 import { prisma } from '../../../prisma/client';
 
-export const getUserAbilitiesUseCase = async (userId: string, page: number, limit: number) => {
+export const getUserAbilitiesUseCase = async (
+  userId: string,
+  page: number,
+  limit: number
+) => {
   const count = await prisma.userAbilities.count({
     where: {
       user_id: userId,
     },
-  })
+  });
 
   const abilities = await prisma.userAbilities.findMany({
     where: {
@@ -19,16 +23,16 @@ export const getUserAbilitiesUseCase = async (userId: string, page: number, limi
     take: limit,
     orderBy: {
       ability: {
-        createdAt: 'desc'
-      }
-    }
+        createdAt: 'desc',
+      },
+    },
   });
 
   const randomDogPicture = await prisma.dogProfilePictures.findFirst({
     where: {
-      user_id: userId
-    }
-  })
+      user_id: userId,
+    },
+  });
 
   return {
     count,
@@ -40,8 +44,8 @@ export const getUserAbilitiesUseCase = async (userId: string, page: number, limi
         birthdate: ability.user.birthdate,
         ability: ability.ability.name,
         years_experience: ability.years_experience,
-        profilePicture: randomDogPicture?.url
+        profilePicture: randomDogPicture?.url,
       };
-    })
+    }),
   };
 };

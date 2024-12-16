@@ -9,7 +9,7 @@ export const createAbilityUseCase = async (name: string) => {
       name: nameLowerCase,
     },
   });
-  
+
   if (abilityExists) {
     throw new AppError('Ability already exists', 409);
   }

@@ -89,7 +89,10 @@ export const destroyAbility = async (
   res.status(200).json(result);
 };
 
-export const getUserAbilities = async (req: IGetUserAuthInfoRequest, res: Response) => {
+export const getUserAbilities = async (
+  req: IGetUserAuthInfoRequest,
+  res: Response
+) => {
   const userId = req.user?.id;
 
   if (!userId) {
@@ -98,7 +101,11 @@ export const getUserAbilities = async (req: IGetUserAuthInfoRequest, res: Respon
 
   const { page, limit } = req.query;
 
-  const abilities = await getUserAbilitiesUseCase(userId, parseInt(page as string), parseInt(limit as string));
+  const abilities = await getUserAbilitiesUseCase(
+    userId,
+    parseInt(page as string),
+    parseInt(limit as string)
+  );
 
   res.status(200).json(abilities);
 };

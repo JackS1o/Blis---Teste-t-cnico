@@ -22,13 +22,13 @@ export const userAbilitiesUseCase = async (
     where: {
       user_id: userId,
       ability_id: abilities.id,
-    }
-  })
+    },
+  });
 
   if (userAbilitiesExists.length > 0) {
     throw new AppError('Ability already exists', 409);
   }
-  
+
   await prisma.userAbilities.create({
     data: {
       user_id: userId,
