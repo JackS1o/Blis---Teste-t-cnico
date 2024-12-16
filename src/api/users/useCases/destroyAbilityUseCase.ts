@@ -1,4 +1,3 @@
-import { AppError } from '../../../errors';
 import { prisma } from '../../../prisma/client';
 
 export const destroyAbilityUseCase = async (abilities: Array<string>, userId: string) => {

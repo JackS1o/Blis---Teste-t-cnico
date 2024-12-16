@@ -3,6 +3,7 @@ import {
   createUser,
   createUserDocument,
   destroyAbility,
+  getUserAbilities,
   login,
   userAbilities,
 } from '../controllers';
@@ -40,5 +41,7 @@ router.post(
 );
 
 router.delete('/abilities', authMiddleware, validate(deleteAbilitiesValidationSchema), wrapHandler(destroyAbility));
+
+router.get('/abilities', authMiddleware, wrapHandler(getUserAbilities));
 
 export default router;

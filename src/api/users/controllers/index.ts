@@ -6,6 +6,7 @@ import { AppError } from '../../../errors';
 import { IGetUserAuthInfoRequest } from '../types/definitionfile';
 import { userAbilitiesUseCase } from '../useCases/userAbilitiesUseCase';
 import { destroyAbilityUseCase } from '../useCases/destroyAbilityUseCase';
+import { getUserAbilitiesUseCase } from '../useCases/getUserAbilitiesUseCase';
 
 export const createUser = async (
   req: Request,
@@ -86,4 +87,16 @@ export const destroyAbility = async (
 
   const result = await destroyAbilityUseCase(abilities, userId);
   res.status(200).json(result);
+};
+
+export const getUserAbilities = async (req: IGetUserAuthInfoRequest, res: Response) => {
+  const userId = req.user?.id;
+
+  if (!userId) {
+    throw new AppError('User not authenticated', 401);
+  }
+
+  const abilities = await getUserAbilitiesUseCase(userId);
+
+  res.status(200).json(abilities);
 };
