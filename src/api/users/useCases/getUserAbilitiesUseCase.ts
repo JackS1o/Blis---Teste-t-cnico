@@ -13,19 +13,28 @@ export const getUserAbilitiesUseCase = async (userId: string, page: number, limi
     },
     include: {
       ability: true,
+      user: true
     },
     skip: (page - 1) * limit,
-    take: limit
+    take: limit,
+    orderBy: {
+      ability: {
+        createdAt: 'desc'
+      }
+    }
   });
 
   return {
     count,
     rows: abilities.map((ability) => {
       return {
-        id: ability.id,
-        name: ability.ability.name,
+        user_id: ability.user_id,
+        name: ability.user.name,
+        email: ability.user.email,
+        birthdate: ability.user.birthdate,
+        ability: ability.ability.name,
         years_experience: ability.years_experience,
       };
-    }),
+    })
   };
 };
