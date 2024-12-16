@@ -1,5 +1,5 @@
 import { prisma } from '../../../prisma/client';
-import { AppError, errorHandler } from '../../../errors';
+import { AppError } from '../../../errors';
 
 export const createUserDocumentUseCase = async (
   userId: string,

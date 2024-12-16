@@ -11,6 +11,7 @@ app.use(express.json());
 app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
 
 app.use('/users', routes.users);
+app.use('/abilities', routes.abilities);
 
 app.use(
   (err: Error | AppError, req: Request, res: Response, next: NextFunction) => {
