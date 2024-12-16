@@ -23,11 +23,13 @@ export const createUserUseCase = async (
   const user = await prisma.user.create({
     data: {
       name,
-      birthdate,
+      birthdate: new Date(birthdate),
       email,
       password: hashedPassword,
     },
   });
 
-  return user;
+  return {
+    message: 'User created successfully',
+  }
 };

@@ -39,3 +39,9 @@ export const updateUserValidationSchema = Joi.object({
     })
     .min(0),
 });
+
+export const deleteAbilitiesValidationSchema = Joi.object({
+  abilities: Joi.array().required().messages({
+    'array.empty': 'As habilidades são obrigatórias.',
+  }),
+});

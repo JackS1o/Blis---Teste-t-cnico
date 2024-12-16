@@ -2,12 +2,14 @@ import express, { Request, Response } from 'express';
 import {
   createUser,
   createUserDocument,
+  destroyAbility,
   login,
   userAbilities,
 } from '../controllers';
 import {
   createUserDocumentValidationSchema,
   createUserValidationSchema,
+  deleteAbilitiesValidationSchema,
   loginValidationSchema,
   updateUserValidationSchema,
 } from '../utils/userValidation';
@@ -36,5 +38,7 @@ router.post(
   validate(updateUserValidationSchema),
   wrapHandler(userAbilities)
 );
+
+router.delete('/abilities', authMiddleware, validate(deleteAbilitiesValidationSchema), wrapHandler(destroyAbility));
 
 export default router;
