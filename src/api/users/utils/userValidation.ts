@@ -27,3 +27,15 @@ export const loginValidationSchema = Joi.object({
 export const createUserDocumentValidationSchema = Joi.object({
   name: Joi.string().required(),
 });
+
+export const updateUserValidationSchema = Joi.object({
+  ability: Joi.string().required().messages({
+    'string.empty': 'A habilidade é obrigatória.',
+  }),
+  years_experience: Joi.number()
+    .required()
+    .messages({
+      'number.empty': 'O tempo de experiência é obrigatório.',
+    })
+    .min(0),
+});

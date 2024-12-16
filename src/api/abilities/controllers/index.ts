@@ -1,6 +1,6 @@
-import { createAbilityUseCase } from "../useCases/createAbilityUseCase";
+import { createAbilityUseCase } from '../useCases/createAbilityUseCase';
 import { Request, Response } from 'express';
-import { updateAbilityUseCase } from "../useCases/updateAbilityUseCase";
+import { updateAbilityUseCase } from '../useCases/updateAbilityUseCase';
 
 export const createAbility = async (req: Request, res: Response) => {
   const { name } = req.body;

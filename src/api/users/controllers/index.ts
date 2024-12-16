@@ -4,6 +4,7 @@ import { loginUserUseCase } from '../useCases/loginUserUseCase';
 import { createUserDocumentUseCase } from '../useCases/createUserDocumentUseCase';
 import { AppError } from '../../../errors';
 import { IGetUserAuthInfoRequest } from '../types/definitionfile';
+import { userAbilitiesUseCase } from '../useCases/userAbilitiesUseCase';
 
 export const createUser = async (
   req: Request,
@@ -50,4 +51,23 @@ export const createUserDocument = async (
     message: 'Document created successfully',
     document,
   });
+};
+
+export const userAbilities = async (
+  req: IGetUserAuthInfoRequest,
+  res: Response
+) => {
+  const { ability, years_experience } = req.body;
+  const userId = req.user?.id;
+
+  if (!userId) {
+    throw new AppError('User not authenticated', 401);
+  }
+
+  const abilities = await userAbilitiesUseCase(
+    ability,
+    years_experience,
+    userId
+  );
+  res.status(200).json(abilities);
 };

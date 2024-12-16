@@ -1,9 +1,15 @@
 import express, { Request, Response } from 'express';
-import { createUser, createUserDocument, login } from '../controllers';
+import {
+  createUser,
+  createUserDocument,
+  login,
+  userAbilities,
+} from '../controllers';
 import {
   createUserDocumentValidationSchema,
   createUserValidationSchema,
   loginValidationSchema,
+  updateUserValidationSchema,
 } from '../utils/userValidation';
 import { wrapHandler } from '../../../services/response';
 import { validate } from '../../middlewares/validation';
@@ -22,6 +28,13 @@ router.post(
   upload.single('file'),
   validate(createUserDocumentValidationSchema),
   wrapHandler(createUserDocument)
+);
+
+router.post(
+  '/abilities',
+  authMiddleware,
+  validate(updateUserValidationSchema),
+  wrapHandler(userAbilities)
 );
 
 export default router;
