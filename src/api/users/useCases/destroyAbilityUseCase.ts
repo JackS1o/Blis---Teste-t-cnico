@@ -1,3 +1,4 @@
+import { AppError } from '../../../errors';
 import { prisma } from '../../../prisma/client';
 
 export const destroyAbilityUseCase = async (
@@ -27,5 +28,11 @@ export const destroyAbilityUseCase = async (
     },
   });
 
-  return result;
+  if (result.count === 0) {
+    throw new AppError('Ability not found', 404);
+  } else {
+    return {
+      message: 'Ability deleted successfully',
+    }
+  }
 };
