@@ -18,6 +18,10 @@
   3. Na raíz do projeto, execute o comando `docker-compose up --build` para subir o container da aplicação e do banco de dados. O servidor estará disponível na porta `3000`.
 
   4. Acesse o projeto em http://localhost:3000
+
+  5. Dentro do container docker, execute o comando `npm run prisma:migrate` para migrar as tabelas do banco de dados.
+
+  6. Para parar o container, execute o comando `docker-compose down`.
 </details>
 
 <details>
