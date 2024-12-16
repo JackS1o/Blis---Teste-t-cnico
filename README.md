@@ -216,5 +216,34 @@
 
 </details>
 
-## Documentação
+<details>
+  <summary>
+    <strong>Tecnologias Usadas no Projeto</strong>
+  </summary><br>
 
+  - TypeScript
+  - Node.js
+  - Express
+  - Prisma
+  - MySQL
+  - Docker
+  - Docker-Compose
+  - Joi
+  - Argon2
+  - axios
+  - dotenv
+  - Multer
+  - jsonwebtoken
+</details>
+
+<details>
+  <summary>
+    <strong>Scripts do Projeto</strong>
+  </summary><br>
+
+  - `docker-compose up --build` - Subir o container da aplicação e do banco de dados.
+  - `npm run dev` - Subir o servidor local.
+  - `npm run prisma:migrate` - Migrar as tabelas do banco de dados.
+  - `npm run format` - Formatar o código.
+  - `npm run build` - Compilar o código typescript para o javascript.
+</details>
