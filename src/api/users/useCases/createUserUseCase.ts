@@ -9,10 +9,14 @@ export const createUserUseCase = async (
   email: string,
   password: string
 ) => {
+  const apiBonusUrl = process.env.API_BONUS;
+
+  if (!apiBonusUrl) {
+    throw new AppError('API_BONUS environment variable is not set', 500);
+  }
+
   const userExists = await prisma.user.findUnique({
-    where: {
-      email,
-    },
+    where: { email },
   });
 
   if (userExists) {
@@ -21,33 +25,24 @@ export const createUserUseCase = async (
 
   const hashedPassword = await hashPassword(password);
 
-  const apiBonusUrl = process.env.API_BONUS;
-  if (!apiBonusUrl) {
-    throw new AppError('API_BONUS environment variable is not set', 500);
-  }
-  
   const { data } = await axios.get(apiBonusUrl);
 
   const user = await prisma.user.create({
     data: {
       name,
-      birthdate: new Date(birthdate),
+      birthdate,
       email,
       password: hashedPassword,
     },
   });
 
-  const image = data.message;
-
   await prisma.dogProfilePictures.create({
     data: {
       user_id: user.id,
-      url: image,
+      url: data.message,
     },
   });
-  
 
-  return {
-    message: 'User created successfully',
-  }
+  return { message: 'User created successfully' };
 };
+

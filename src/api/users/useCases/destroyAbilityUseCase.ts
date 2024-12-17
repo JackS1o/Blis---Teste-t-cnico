@@ -5,6 +5,10 @@ export const destroyAbilityUseCase = async (
   abilities: Array<string>,
   userId: string
 ) => {
+  if (abilities.length === 0) {
+    throw new AppError('No abilities provided', 400);
+  }
+
   const abilitiesList = abilities.map((ability) => {
     const abilityLowerCase = ability.toLowerCase();
     return abilityLowerCase;
@@ -18,6 +22,10 @@ export const destroyAbilityUseCase = async (
       active: true,
     },
   });
+
+  if (abilityId.length === 0) {
+    throw new AppError('Ability not found', 404); 
+  }
 
   const result = await prisma.userAbilities.deleteMany({
     where: {
@@ -33,6 +41,7 @@ export const destroyAbilityUseCase = async (
   } else {
     return {
       message: 'Ability deleted successfully',
-    }
+    };
   }
 };
+
