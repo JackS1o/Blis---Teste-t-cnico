@@ -21,7 +21,9 @@
 
   5. Dentro do container docker, execute o comando `npm run prisma:migrate` para migrar as tabelas do banco de dados.
 
-  6. Para parar o container, execute o comando `docker-compose down`.
+  6. Execute o comando `npm test` para executar os testes unitários.
+
+  7. Para parar o container, execute o comando `docker-compose down`.
 </details>
 
 <details>
@@ -250,4 +252,5 @@
   - `npm run prisma:migrate` - Migrar as tabelas do banco de dados.
   - `npm run format` - Formatar o código.
   - `npm run build` - Compilar o código typescript para o javascript.
+  - `npm test` - Executar os testes unitários.
 </details>
