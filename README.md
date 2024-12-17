@@ -240,6 +240,7 @@
   - dotenv
   - Multer
   - jsonwebtoken
+  - jest
 </details>
 
 <details>
