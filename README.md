@@ -15,15 +15,17 @@
     `
     npm install
     `
-  3. Na raíz do projeto, execute o comando `docker-compose up --build` para subir o container da aplicação e do banco de dados. O servidor estará disponível na porta `3000`.
+  3. Crie um arquivo .env e adicione nele as variáveis de ambiente conforme o arquivo .env.exemple
 
-  4. Acesse o projeto em http://localhost:3000
+  4. Na raíz do projeto, execute o comando `docker-compose up --build` para subir o container da aplicação e do banco de dados. O servidor estará disponível na porta `3000`.
 
-  5. Dentro do container docker, execute o comando `npm run prisma:migrate` para migrar as tabelas do banco de dados.
+  5. Acesse o projeto em http://localhost:3000
 
-  6. Execute o comando `npm test` para executar os testes unitários.
+  6. Entre no container docker com o comando `docker exec -it meu-backend bash`, execute o comando `npm run prisma:migrate` para migrar as tabelas do banco de dados.
 
-  7. Para parar o container, execute o comando `docker-compose down`.
+  7. Execute o comando `npm test` para executar os testes unitários.
+
+  8. Para parar o container, execute o comando `docker-compose down`.
 </details>
 
 <details>
