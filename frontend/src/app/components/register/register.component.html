@@ -1,0 +1,37 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="brand">
+        <div class="brand-logo"></div>
+        <h1>Criar conta</h1>
+        <p>Preencha os campos abaixo para criar sua conta</p>
+    </div>
+  
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                placeholder="name@company.com"
+                autocomplete="email"
+            >
+            <div class="error" id="emailError"></div>
+        </div>
+  
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input 
+                type="password" 
+                id="password" 
+                placeholder="Insira sua senha"
+                autocomplete="current-password"
+            >
+            <div class="error" id="passwordError"></div>
+        </div>
+  
+        <button type="submit" class="login-btn" id="loginButton">
+            Cadastre-se
+        </button>
+    </form>
+  </div>
+</div>
