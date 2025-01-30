@@ -10,7 +10,9 @@
         <div class="form-group">
             <label for="email">Email</label>
             <input 
-                type="email" 
+                type="email"
+                [(ngModel)]="loginObj.email"
+                name="email"
                 id="email" 
                 placeholder="name@company.com"
                 autocomplete="email"
@@ -21,8 +23,10 @@
         <div class="form-group">
             <label for="password">Senha</label>
             <input 
-                type="password" 
-                id="password" 
+                type="password"
+                [(ngModel)]="loginObj.password"
+                name="password"
+                id="password"
                 placeholder="Insira sua senha"
                 autocomplete="current-password"
             >
@@ -37,7 +41,7 @@
             <a href="#" class="forgot-password">Esqueci minha senha?</a>
         </div>
   
-        <button type="submit" class="login-btn" id="loginButton">
+        <button type="submit" class="login-btn" id="loginButton" (click)="login()">
             Login
         </button>
     </form>

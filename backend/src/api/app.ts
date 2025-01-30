@@ -3,8 +3,11 @@ import routes from '../api/routes';
 import { errorHandler } from '../errors';
 import { AppError } from '../errors';
 import path from 'path';
+import cors from 'cors';
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 

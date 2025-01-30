@@ -8,11 +8,35 @@
   
     <form id="loginForm">
         <div class="form-group">
+            <label for="name">Nome</label>
+            <input 
+                type="text" 
+                id="name"
+                [(ngModel)]="registerObj.name"
+                name="name"
+                placeholder="Nome"
+                autocomplete="Nome"
+            >
+        </div>
+
+        <!-- <div class="form-group"> -->
+            <label for="birthdate">Data de Nascimento MM/DD/AAAA</label>
+            <mat-form-field>
+              <mat-label>Escolha uma data</mat-label>
+              <input matInput [matDatepicker]="picker" [(ngModel)]="registerObj.birthdate" name="birthdate">
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker startView="year"></mat-datepicker>
+            </mat-form-field>
+          <!-- </div> -->
+
+        <div class="form-group">
             <label for="email">Email</label>
             <input 
                 type="email" 
-                id="email" 
+                id="email"
+                [(ngModel)]="registerObj.email"
                 placeholder="name@company.com"
+                name="email"
                 autocomplete="email"
             >
             <div class="error" id="emailError"></div>
@@ -21,15 +45,17 @@
         <div class="form-group">
             <label for="password">Senha</label>
             <input 
-                type="password" 
-                id="password" 
+                type="password"
+                [(ngModel)]="registerObj.password"
+                id="password"
+                name="password"
                 placeholder="Insira sua senha"
                 autocomplete="current-password"
             >
             <div class="error" id="passwordError"></div>
         </div>
   
-        <button type="submit" class="login-btn" id="loginButton">
+        <button type="submit" class="login-btn" id="loginButton" (click)="register()">
             Cadastre-se
         </button>
     </form>
